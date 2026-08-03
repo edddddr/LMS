@@ -1,10 +1,10 @@
 
 export const getAllProducts = (req, res) =>{
-    res.send("All Products");
+    res.send("Get All Products");
 }
 
 export const getProduct = (req, res) => {
-    res.send(`product ${req.query.id}`)
+    res.send(`product ${req.params.id}`)
 }
 
 export const createProduct = (req, res) => {
