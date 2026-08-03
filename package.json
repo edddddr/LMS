@@ -1,15 +1,21 @@
 {
-  "name": "express",
+  "name": "ecommerce-api",
   "version": "1.0.0",
   "type": "module",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/server.js",
+    "start": "node src/server.js",
+    "test": "echo \"No tests yet\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Production-ready E-commerce REST API built with Express",
+  "repository": {
+    "type": "git",
+    "url": "..."
+},
   "dependencies": {
     "express": "^5.2.1"
   },
