@@ -1,20 +1,39 @@
 import express from 'express';
-import logger from "./middleware/logger.js"
+import morgan from "morgan";
+import cors from "cors";
+
 import productRouter from "./routes/product.routes.js"
+
 
 const app = express();
 
-app.use(logger)
+app.use(helmet());
+
+app.use(cors());
+
+app.use(morgan("dev"));
+
+app.use(express.json());
+
+
+
 app.use("/product", productRouter)
 
 
-// function home(req, res){
-//     res.send('Hello World!');
-// }
+app.use((req, res) => {
+    res.status(404).json({
+        success: false,
+        message: "Route not found",
+    });
+});
 
-// app.get('/', home);
 
-
+app.use((err, req, res, next) => {
+    res.status(500).json({
+        success: false,
+        message: err.message,
+    });
+});
 
 
 export default app;
