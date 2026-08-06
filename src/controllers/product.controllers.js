@@ -1,6 +1,11 @@
+import { getAllProducts } from "../services/product.service.js"
+
 
 export const getAllProducts = (req, res) =>{
-    res.send("Get All Products");
+
+    const products = await getAllProducts();
+    res.status(200).json(products);
+
 }
 
 export const getProduct = (req, res) => {
