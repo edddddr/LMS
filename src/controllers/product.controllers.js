@@ -1,10 +1,17 @@
 import { getAllProducts } from "../services/product.service.js"
+import { apiResponse } from "../utils/apiResponse.js"
 
 
 export const getAllProducts = (req, res) =>{
 
     const products = await getAllProducts();
-    res.status(200).json(products);
+
+    return apiResponse(
+        res,
+        200,
+        "Products retrieved successfully",
+        products
+    )
 
 }
 
