@@ -1,5 +1,6 @@
 import { getAllProducts } from "../services/product.service.js"
 import { apiResponse } from "../utils/apiResponse.js"
+import { HTTP_STATUS } from "../constants/httpStatus.js"
 
 
 export const getAllProducts = (req, res) =>{
@@ -8,7 +9,7 @@ export const getAllProducts = (req, res) =>{
 
     return apiResponse(
         res,
-        200,
+        HTTP_STATUS.OK,
         "Products retrieved successfully",
         products
     )
