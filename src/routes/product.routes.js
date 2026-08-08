@@ -4,12 +4,12 @@ import {
     getProduct
  } from "../controllers/product.controllers"
  
-import { asyncHandler } from "./middleware/util.js"
+import { asyncHandler } from "../utils/asyncHandler.js"
 
 const router = Router();
 
 router.get("/", asyncHandler(getAllProducts));
-router.get("/:id", getProduct);
+router.get("/:id", asyncHandler(getProduct));
 // router.post("/", createProduct);
 // router.patch("/:id", updateProduct);
 // router.delete("/:id", deleteProduct);
