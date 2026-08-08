@@ -3,6 +3,7 @@ import morgan from "morgan";
 import cors from "cors";
 
 import productRouter from "./routes/product.routes.js"
+import { errorHandler } from "./middleware/errorHandler.js"
 
 
 const app = express();
@@ -28,12 +29,7 @@ app.use((req, res) => {
 });
 
 
-app.use((err, req, res, next) => {
-    res.status(500).json({
-        success: false,
-        message: err.message,
-    });
-});
+app.use(errorHandler);
 
 
 export default app;
