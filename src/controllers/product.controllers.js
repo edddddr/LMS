@@ -1,17 +1,20 @@
 import { getAllProducts } from "../services/product.service.js"
 import { apiResponse } from "../utils/apiResponse.js"
 import { HTTP_STATUS } from "../constants/httpStatus.js"
+import { getPagination } from "../utils/pagination.js"
 
 
 export const getAllProducts = (req, res) =>{
 
-    const products = await getAllProducts();
+    const {page, limit } = getPagination();
+
+    const result = await getAllProducts(page, limit);
 
     return apiResponse(
         res,
         HTTP_STATUS.OK,
         "Products retrieved successfully",
-        products
+        result
     )
 
 }
