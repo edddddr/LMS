@@ -1,14 +1,11 @@
 import { Router } from "express";
-import {
-    getAllProducts, 
-    getProduct
- } from "../controllers/product.controllers"
- 
-import { asyncHandler } from "../utils/asyncHandler.js"
+import { getProducts, getProduct } from "../controllers/product.controllers";
+
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 const router = Router();
 
-router.get("/", asyncHandler(getAllProducts));
+router.get("/", asyncHandler(getProducts));
 router.get("/:id", asyncHandler(getProduct));
 // router.post("/", createProduct);
 // router.patch("/:id", updateProduct);

@@ -4,9 +4,9 @@ import { HTTP_STATUS } from "../constants/httpStatus.js"
 import { getPagination } from "../utils/pagination.js"
 
 
-export const getAllProducts = (req, res) =>{
+export const getProducts = (req, res) =>{
 
-    const {page, limit } = getPagination();
+    const {page, limit } = getPagination(req.query);
 
     const result = await getAllProducts(page, limit);
 
