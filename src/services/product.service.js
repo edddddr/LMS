@@ -1,5 +1,7 @@
 import prisma from "../config/prisma.js";
 import { NotFoundError } from "../error/NotFoundError.js";
+import { ConflictError } from "../errors/ConflictError.js";
+import { generateSlug } from "../utils/slug.js";
 
 export const getAllProducts = async (page, limit) => {
   const [products, total] = await Promise.all([
@@ -41,6 +43,41 @@ export const getProductById = async (id) => {
   if (!product) {
     throw new NotFoundError("Product not found");
   }
+
+  return product;
+};
+
+export const createProductService = async (data) => {
+  const existingProduct = await prisma.product.findUnique({
+    where: {
+      sku: data.sku,
+    },
+  });
+
+  if (existingProduct) {
+    throw new ConflictError("SKU already exists");
+  }
+
+  const baseSlug = generateSlug(data.name);
+
+  let slug = baseSlug;
+  let counter = 1;
+
+  while (
+    await prisma.product.findUnique({
+      where: { slug },
+    })
+  ) {
+    slug = `${baseSlug}-${counter}`;
+    counter++;
+  }
+
+  const product = await prisma.product.create({
+    data: {
+      ...data,
+      slug,
+    },
+  });
 
   return product;
 };
