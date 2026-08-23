@@ -27,6 +27,17 @@ export const getProduct = async (req, res) => {
   );
 };
 
+export const createProduct = async (req, res) => {
+  const product = await createProductService(req.body);
+
+  return apiResponse(
+    res,
+    HTTP_STATUS.CREATED,
+    "Product created successfully",
+    product,
+  );
+};
+
 export const createProduct = (req, res) => {
   res.send(`product ${req.query.id}`);
 };
