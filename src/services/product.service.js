@@ -30,3 +30,17 @@ export const getAllProducts = async (page, limit) => {
     },
   };
 };
+
+export const getProductById = async (id) => {
+  const product = await prisma.product.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  if (!product) {
+    throw new NotFoundError("Product not found");
+  }
+
+  return product;
+};
